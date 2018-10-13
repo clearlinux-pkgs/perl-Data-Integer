@@ -4,15 +4,15 @@
 #
 Name     : perl-Data-Integer
 Version  : 0.006
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-integer-perl/libdata-integer-perl_0.006-1.debian.tar.xz
 Summary  : 'details of the native integer data type'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
-Requires: perl-Data-Integer-man
-BuildRequires : perl(Module::Build)
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Data-Integer-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 NAME
@@ -23,19 +23,28 @@ integer is one of the types of datum that can appear in the numeric part
 of a Perl scalar.  This module supplies constants describing the native
 integer type.
 
-%package man
-Summary: man components for the perl-Data-Integer package.
+%package dev
+Summary: dev components for the perl-Data-Integer package.
+Group: Development
+Provides: perl-Data-Integer-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Data-Integer package.
+
+
+%package license
+Summary: license components for the perl-Data-Integer package.
 Group: Default
 
-%description man
-man components for the perl-Data-Integer package.
+%description license
+license components for the perl-Data-Integer package.
 
 
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Data-Integer-0.006
-mkdir -p %{_topdir}/BUILD/Data-Integer-0.006/deblicense/
+cd ..
+%setup -q -T -D -n Data-Integer-0.006 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Data-Integer-0.006/deblicense/
 
 %build
@@ -53,10 +62,12 @@ fi
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Data-Integer
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Data-Integer/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,8 +76,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Data/Integer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Data/Integer.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Data::Integer.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Data-Integer/deblicense_copyright
