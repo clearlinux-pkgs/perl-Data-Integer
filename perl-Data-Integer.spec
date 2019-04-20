@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-Integer
 Version  : 0.006
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-integer-perl/libdata-integer-perl_0.006-1.debian.tar.xz
@@ -27,6 +27,7 @@ integer type.
 Summary: dev components for the perl-Data-Integer package.
 Group: Development
 Provides: perl-Data-Integer-devel = %{version}-%{release}
+Requires: perl-Data-Integer = %{version}-%{release}
 
 %description dev
 dev components for the perl-Data-Integer package.
@@ -45,7 +46,7 @@ license components for the perl-Data-Integer package.
 cd ..
 %setup -q -T -D -n Data-Integer-0.006 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Data-Integer-0.006/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Data-Integer-0.006/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
