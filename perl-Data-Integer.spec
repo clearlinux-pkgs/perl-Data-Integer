@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-Integer
 Version  : 0.006
-Release  : 16
+Release  : 17
 URL      : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-integer-perl/libdata-integer-perl_0.006-1.debian.tar.xz
@@ -14,6 +14,7 @@ License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Data-Integer-license = %{version}-%{release}
 Requires: perl-Data-Integer-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
+BuildRequires : perl(Module::Build)
 
 %description
 NAME
@@ -99,4 +100,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.3/Data/Integer.pm
+/usr/lib/perl5/vendor_perl/5.32.1/Data/Integer.pm
