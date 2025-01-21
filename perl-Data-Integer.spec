@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-Integer
 Version  : 0.006
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Data-Integer-0.006.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-integer-perl/libdata-integer-perl_0.006-1.debian.tar.xz
